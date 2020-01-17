@@ -26,7 +26,8 @@ public abstract class TransactionTransformer<T extends TransactionTransformer> {
 
     private BigInteger nonce;
     private String from;
-    private BigInteger gasPrice = Convert.toPeb("25", Convert.Unit.STON).toBigInteger();
+//    private BigInteger gasPrice = Convert.toPeb("25", Convert.Unit.STON).toBigInteger();
+    private BigInteger gasPrice = BigInteger.ZERO;
     private BigInteger gasLimit;
     protected boolean feeDelegate;
 

@@ -16,8 +16,11 @@
 
 package com.klaytn.caver;
 
+import com.klaytn.caver.crypto.KlayCredentials;
 import com.klaytn.caver.model.TestGenerator;
+import com.klaytn.caver.model.dto.Env;
 import org.junit.Test;
+import org.web3j.utils.Strings;
 
 public class IntegrationTest {
 
@@ -76,6 +79,7 @@ public class IntegrationTest {
 
     @Test
     public void INT_FD() throws Exception {
+
         testGenerator = new TestGenerator.Builder("INT-FD")
                 .setSkip("007.json", "008.json", "009.json", "010.json", "011.json", "012.json", "034.json").build();
         testGenerator.generateAll();
@@ -104,7 +108,9 @@ public class IntegrationTest {
 
     @Test
     public void INT_SOL() throws Exception {
-        testGenerator = new TestGenerator.Builder("INT-SOL").build();
+        testGenerator = new TestGenerator.Builder("INT-SOL")
+                .setOnly("065.json")
+                .build();
         testGenerator.generateAll();
     }
 }

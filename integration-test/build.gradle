@@ -4,5 +4,5 @@ dependencies {
     compile project(':core')
 }
 
-test.enabled = project.hasProperty('integration-tests') ?
-        project.getProperty('integration-tests') : false
+//test.enabled = project.hasProperty('integration-tests') ?
+//        project.getProperty('integration-tests') : false

@@ -16,11 +16,17 @@
 
 package com.klaytn.caver.feature;
 
+import com.klaytn.caver.Caver;
+import com.klaytn.caver.Klay;
 import com.klaytn.caver.crypto.KlayCredentials;
+import com.klaytn.caver.methods.response.KlayBlock;
 import com.klaytn.caver.tx.account.*;
 import org.junit.Test;
+import org.web3j.protocol.core.DefaultBlockParameter;
+import org.web3j.protocol.core.Request;
 import org.web3j.utils.Numeric;
 
+import java.io.IOException;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -29,6 +35,16 @@ import java.util.List;
 import static junit.framework.TestCase.assertEquals;
 
 public class AccountKeyTest {
+
+    @Test
+    public void getBlockByBlockNumberTest() throws IOException {
+        int testBlock = 10427704;
+        DefaultBlockParameter blockNo = DefaultBlockParameter.valueOf(BigInteger.valueOf(testBlock));
+        Caver caver = Caver.build(Caver.BAOBAB_URL);
+        Klay klay = caver.klay();
+        Request<?, KlayBlock> block = klay.getBlockByNumber(blockNo, true);
+        System.out.println(block.send().getBlock().getNumber());
+    }
 
     @Test
     public void testAccountKeyNil() {
