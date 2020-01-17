@@ -26,13 +26,13 @@ import static org.slf4j.LoggerFactory.getLogger;
 public class Application {
     private static final Logger log = getLogger(Application.class);
     // chain id
-    private static final int LOCAL_CHAIN_ID = 1000;
+    private static final int LOCAL_CHAIN_ID = 1001;
     private static final BigInteger GAS_LIMIT = DefaultGasProvider.GAS_LIMIT;
     private static final BigInteger GAS_PRICE = BigInteger.ZERO;
 
     private static final int REQUEST_COUNT_TO_SEND = 1000;
 
-    private static KlayCredentials credentials = KlayCredentials.create("0x8927587b58253c930a4a3879dfb8c11824ec5c76dfbc1bba1280514b5dc12088");
+    private static KlayCredentials credentials = KlayCredentials.create("0x280a99ddffe9c3df8978ff891b47f614acdb73f075658a6537fd19c9bb61d2d2");
     private static final String TO_ADDRESS = "0x5dad554b0742c41508c7e091586173b8ad066524";
     public static final KlayCredentials FEE_PAYER = KlayCredentials.create(
             "0x1e558ea00698990d875cb69d3c8f9a234fe8eab5c6bd898488d851669289e178",
@@ -61,7 +61,7 @@ public class Application {
         erc20 = ERC20.load(erc20.getContractAddress(), caver, credentials, LOCAL_CHAIN_ID, new StaticGasProvider(BigInteger.ZERO, GAS_LIMIT));
 
         // ft transfer
-        for (int i = 0; i < REQUEST_COUNT_TO_SEND; i++) {
+        for (int i = 0; i < 10; i++) {
             erc20.transfer(TO_ADDRESS, BigInteger.ONE).send();
         }
 
@@ -100,7 +100,7 @@ public class Application {
         int successReqCount = 0;
         for (int i = 0; i < REQUEST_COUNT_TO_SEND; i++) {
             ValueTransferTransaction valueTransferTransaction = ValueTransferTransaction
-                    .create(credentials.getAddress(), TO_ADDRESS, BigInteger.ONE, GAS_LIMIT);
+                    .create(credentials.getAddress(), FEE_PAYER.getAddress(), BigInteger.valueOf(100), GAS_LIMIT);
             KlayTransactionReceipt.TransactionReceipt receipt = transactionManager.executeTransaction(valueTransferTransaction);
 
             if (receipt.getStatus().equals("0x1")) {
