@@ -21,6 +21,7 @@ import com.klaytn.caver.crypto.KlaySignatureData;
 import com.klaytn.caver.utils.KlaySignatureDataUtils;
 import com.klaytn.caver.tx.model.KlayRawTransaction;
 import com.klaytn.caver.utils.KlayTransactionUtils;
+import org.web3j.crypto.Hash;
 import org.web3j.crypto.Sign;
 import org.web3j.rlp.*;
 import org.web3j.utils.Numeric;
@@ -124,6 +125,7 @@ public class TxTypeLegacyTransaction extends AbstractTxType {
         result.add(RlpString.create(Numeric.hexStringToByteArray(getData())));
         result.addAll(signatureData.toRlpList().getValues());
         byte[] encodedTransaction = RlpEncoder.encode(new RlpList(result));
+        System.out.println(Numeric.toHexString(Hash.sha3(encodedTransaction)));
         Sign.SignatureData signedSignatureData = Sign.signMessage(encodedTransaction, credentials.getEcKeyPair());
         KlaySignatureData eip155SignatureData = KlaySignatureDataUtils.createEip155KlaySignatureData(signedSignatureData, chainId);
         return eip155SignatureData;

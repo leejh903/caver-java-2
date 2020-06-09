@@ -22,12 +22,15 @@ import com.klaytn.caver.tx.exception.EmptyNonceException;
 import com.klaytn.caver.tx.model.KlayRawTransaction;
 import com.klaytn.caver.utils.BytesUtils;
 import com.klaytn.caver.utils.KlaySignatureDataUtils;
+import org.bouncycastle.jcajce.provider.digest.Keccak;
 import org.web3j.crypto.ECKeyPair;
+import org.web3j.crypto.Hash;
 import org.web3j.crypto.Sign;
 import org.web3j.rlp.RlpEncoder;
 import org.web3j.rlp.RlpList;
 import org.web3j.rlp.RlpString;
 import org.web3j.rlp.RlpType;
+import org.web3j.utils.Numeric;
 
 import java.math.BigInteger;
 import java.util.*;
@@ -184,6 +187,8 @@ public abstract class AbstractTxType implements TxType {
         byte[] encodedTransaction2 = RlpEncoder.encode(new RlpList(rlpTypeList));
 
         for (ECKeyPair ecKeyPair : getEcKeyPairsForSenderSign(credentials)) {
+            System.out.println(Numeric.toHexString(encodedTransaction2));
+            System.out.println(Numeric.toHexString(Hash.sha3(encodedTransaction2)));
             Sign.SignatureData signedSignatureData = Sign.signMessage(encodedTransaction2, ecKeyPair);
             senderSignatureDataList.add(KlaySignatureDataUtils.createEip155KlaySignatureData(signedSignatureData, chainId));
         }

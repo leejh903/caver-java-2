@@ -54,7 +54,7 @@ public class Accounts {
 
     static {
         List<KlayCredentials> testCredentials = new ArrayList<>(Arrays.asList(LUMAN, WAYNE, BRANDON, FEE_PAYER));
-        fillUpKlay(testCredentials);
+//        fillUpKlay(testCredentials);
     }
 
     private static void fillUpKlay(List<KlayCredentials> testCredentials) {

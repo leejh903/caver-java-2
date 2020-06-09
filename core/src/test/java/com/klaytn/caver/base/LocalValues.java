@@ -4,8 +4,8 @@ import com.klaytn.caver.crypto.KlayCredentials;
 
 public class LocalValues {
     public static final KlayCredentials KLAY_PROVIDER = KlayCredentials.create(
-            "871ccee7755bb4247e783110cafa6437f9f593a1eaeebe0efcc1b0852282c3e5"
+            "5725e2184a48247831ccbff5d234576b287e86d893ef432b3d05153afffc96d1"
     );
-    public static final int LOCAL_CHAIN_ID = 2019;
-    public static final int LOCAL_NETWORK_ID = 2018;
+    public static final int LOCAL_CHAIN_ID = 1001;
+    public static final int LOCAL_NETWORK_ID = 1001;
 }

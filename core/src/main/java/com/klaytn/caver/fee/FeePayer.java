@@ -23,6 +23,7 @@ import com.klaytn.caver.tx.model.KlayRawTransaction;
 import com.klaytn.caver.tx.type.AbstractTxType;
 import com.klaytn.caver.utils.BytesUtils;
 import org.web3j.crypto.ECKeyPair;
+import org.web3j.crypto.Hash;
 import org.web3j.crypto.Sign;
 import org.web3j.rlp.RlpEncoder;
 import org.web3j.rlp.RlpList;
@@ -111,6 +112,7 @@ public class FeePayer {
         byte[] encodedTransaction = RlpEncoder.encode(new RlpList(rlpTypeList));
 
         for (ECKeyPair ecKeyPair : credentials.getEcKeyPairsForFeePayerList()) {
+            System.out.println(Numeric.toHexString(Hash.sha3(encodedTransaction)));
             Sign.SignatureData signedSignatureData = Sign.signMessage(encodedTransaction, ecKeyPair);
             feePayerSignatureDataSet.add(KlaySignatureDataUtils.createEip155KlaySignatureData(signedSignatureData, chainId));
         }
